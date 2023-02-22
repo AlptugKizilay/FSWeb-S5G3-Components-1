@@ -115,3 +115,50 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+
+const generateNews = (baslik, tarih, ilkParagraf, ikinciParagraf, ucuncuParagraf) => {
+  const newsItem = document.createElement('div');
+  newsItem.classList.add("article");
+
+  const headerNews = document.createElement('h2');
+  headerNews.textContent = baslik;
+  newsItem.append(headerNews);
+
+  const pNewsDate = document.createElement('p');
+  pNewsDate.classList.add("date");
+  pNewsDate.textContent = tarih;
+  newsItem.append(pNewsDate);
+
+  const pNewsContent1 = document.createElement('p');
+  pNewsContent1.textContent = ilkParagraf;
+  newsItem.append(pNewsContent1);
+  const pNewsContent2 = document.createElement('p');
+  pNewsContent2.textContent = ikinciParagraf;
+  newsItem.append(pNewsContent2);
+  const pNewsContent3 = document.createElement('p');
+  pNewsContent3.textContent = ucuncuParagraf;
+  newsItem.append(pNewsContent3);
+
+  const expand = document.createElement('span');
+  expand.classList.add("expandButton");
+  expand.textContent = '+';
+  newsItem.append(expand);
+  
+  expand.addEventListener('click', (e) =>{
+    newsItem.classList.toggle("article-open");
+    
+  })
+
+  return newsItem;
+}
+     
+const appedNewsIntoContainer = () => {
+  const newsContainer = document.querySelector('.articles');
+  for (const news of data) {
+    const productNews = generateNews(news.baslik, news.tarih, news.ilkParagraf, news.ikinciParagraf, news.ucuncuParagraf);
+    newsContainer.append(productNews);
+    /* console.log(newsContainer); */
+  }
+}
+appedNewsIntoContainer();
+
